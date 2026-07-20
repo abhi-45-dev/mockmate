@@ -1,20 +1,24 @@
 from fastapi import FastAPI
 
+from mockmate.core.config import settings
+
 app = FastAPI(
-    title="MockMate API",
-    version="0.1.0"
+    title=settings.APP_NAME,
+    version=settings.APP_VERSION,
 )
 
 
 @app.get("/")
 def root():
     return {
-        "message": "Welcome to MockMate API"
+        "message": f"Welcome to {settings.APP_NAME}"
     }
 
 
 @app.get("/health")
 def health():
     return {
-        "status": "healthy"
+        "status": "healthy",
+        "app": settings.APP_NAME,
+        "version": settings.APP_VERSION,
     }
